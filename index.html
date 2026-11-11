@@ -35,7 +35,9 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
   background:radial-gradient(ellipse at 50% 78%,#8a5a22 0,#33160a 38%,#0a0407 74%)}
 #bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2.5s;pointer-events:none}
 #bgv.on{opacity:.95}
-#scene.hasvid .rays{opacity:.25!important}
+#scene.hasvid .rays{opacity:.18!important}
+#scene.hasvid .floor,#scene.hasvid .rings,#scene.hasvid .beam{display:none}
+#scene.hasvid .words{text-shadow:0 2px 20px rgba(0,0,0,.7)}
 #scene .rays{position:absolute;left:50%;top:76%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;
   background:repeating-conic-gradient(from 0deg,rgba(255,226,160,.20) 0 5deg,transparent 5deg 15deg);
   -webkit-mask-image:radial-gradient(circle,#000 0,transparent 42%);mask-image:radial-gradient(circle,#000 0,transparent 42%);
@@ -176,7 +178,7 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 
   <!-- eshik ortidagi sahna -->
   <div id="scene">
-    <video id="bgv" muted playsinline loop preload="auto" src="scene.mp4"></video>
+    <video id="bgv" muted playsinline preload="auto" src="scene.mp4"></video>
     <div class="rays"></div><div class="beam"></div><div class="floor"></div>
     <svg class="rings" viewBox="0 0 120 70" aria-hidden="true">
       <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset=".5" stop-color="#e8c27a"/><stop offset="1" stop-color="#a97a2a"/></linearGradient></defs>
