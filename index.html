@@ -153,6 +153,12 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 #flash{position:absolute;inset:0;z-index:25;background:radial-gradient(circle at 50% 50%,#fff8e2,#ffe7b0 40%,transparent 75%);opacity:0;pointer-events:none}
 #flash.go{animation:flash 2.6s ease-out}
 @keyframes flash{0%{opacity:0}18%{opacity:.95}100%{opacity:0}}
+#flash.f1{background:radial-gradient(circle at 50% 46%,#fff8e2,#ffd98a 38%,transparent 78%);animation:fa 1s ease-out}
+#flash.f2{background:#fff6dc;animation:fb 1.7s ease-out}
+@keyframes fa{0%{opacity:0}12%{opacity:.85}100%{opacity:0}}
+@keyframes fb{0%{opacity:0}10%{opacity:1}40%{opacity:.9}100%{opacity:0}}
+#dark{position:absolute;inset:0;z-index:4;background:#000;pointer-events:none}
+#dark.done{display:none}
 
 #fx{position:fixed;inset:0;z-index:15;pointer-events:none;transition:opacity 1s}
 #mus{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:60;width:42px;height:42px;border-radius:50%;
@@ -257,7 +263,7 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
     </button>
     <div id="lockHint">QULFNI BOSING</div>
     <div id="dots"><i></i><i></i></div>
-  </div><div id="gold"></div><div id="gold2"></div></div>
+  </div><div id="gold"></div><div id="gold2"></div><div id="dark"></div></div>
 
   <div id="curt"><div class="p pL"></div><div class="p pR"></div></div>
   <div id="flash"></div>
@@ -354,7 +360,7 @@ function playSeg(from,to,fadeIn){
     g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(1,t+fadeIn);
     if(to){const d=to-from; g.gain.setValueAtTime(1,t+d-0.22); g.gain.linearRampToValueAtTime(0.0001,t+d);
       s.start(t,from,d); s.onended=()=>{ if(node&&node.s===s) onGate(); };}
-    else{ s.loop=true; s.loopStart=8; s.loopEnd=124.2; s.start(t,from); }
+    else{ s.loop=true; s.loopStart=8; s.loopEnd=114.9; s.start(t,from); }
     node={s,g}; return;
   }
   // zaxira 1: oddiy audio element
@@ -370,12 +376,28 @@ function playSeg(from,to,fadeIn){
 }
 function onGate(){ waiting=true; $("doors").classList.add("wait"); $("lock").classList.add("wait"); $("lockHint").classList.add("on"); }
 
+
+/* eshik tepasidagi chiroq yonadi (milt-milt qilib), eshikni ko'rsatadi */
+function lampOn(){
+  const IW=576,IH=1024,sc=Math.max(innerWidth/IW,innerHeight/IH),cx=(innerWidth-IW*sc)/2+290*sc,cy=(innerHeight-IH*sc)/2+30*sc;
+  const K=[[0,0],[.12,.12],[.2,.03],[.34,.3],[.46,.06],[.62,.5],[.8,.2],[1,.7],[2.6,2]];  // [soniya, nur radiusi (ekran balandligiga nisbatan)]
+  const t0=performance.now(), d=$("dark"), HH=Math.max(innerHeight,innerWidth);
+  (function step(){
+    const t=(performance.now()-t0)/1000; let r=2*HH;
+    for(let i=1;i<K.length;i++){ if(t<=K[i][0]){ const a=K[i-1],b=K[i],u=(t-a[0])/(b[0]-a[0]); r=(a[1]+(b[1]-a[1])*u)*HH; break; } }
+    d.style.background=`radial-gradient(circle at ${cx}px ${cy}px,transparent ${r*.35}px,rgba(0,0,0,.97) ${r*1.05+1}px)`;
+    if(t<2.6) requestAnimationFrame(step); else d.classList.add("done");
+  })();
+}
+function doFlash(cls){ const f=$("flash"); f.classList.remove("go","f1","f2"); void f.offsetWidth; f.classList.add(cls); }
+
 $("start").addEventListener("click",async()=>{
   if(started) return; started=true;
   if(ctx&&ctx.state==="suspended") ctx.resume();
   $("start").classList.add("hide"); $("mus").classList.add("show");
   // eshik va qulf musiqaga bog'liq emas: darrov chiqadi
-  setTimeout(()=>{ $("doors").classList.add("show"); $("lock").classList.add("show"); $("dots").classList.add("show"); fx.level=1; },500);
+  $("doors").classList.add("show"); setTimeout(lampOn,500);
+  setTimeout(()=>{ $("lock").classList.add("show"); $("dots").classList.add("show"); fx.level=1; },2300);
   await Promise.race([ready,new Promise(r=>setTimeout(r,3500))]);
   playSeg(0,GATE[0],0.25);
 });
@@ -386,8 +408,8 @@ $("lock").addEventListener("click",()=>{
   waiting=false; $("doors").classList.remove("wait"); l.classList.remove("wait"); $("lockHint").classList.remove("on");
   $("dots").children[step].classList.add("on"); step++;
   const r=l.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,step===1?16:30);
-  if(step===1){ l.classList.add("open1"); playSeg(GATE[0],GATE[1],0.05); }
-  else { l.classList.add("open2"); playSeg(GATE[1],null,0.05); setTimeout(()=>l.classList.add("gone"),700); setTimeout(openDoors,1500); }
+  if(step===1){ doFlash("f1"); l.classList.add("open1"); playSeg(GATE[0],GATE[1],0.05); }
+  else { doFlash("f2"); l.classList.add("open2"); playSeg(GATE[1],null,0.05); setTimeout(()=>l.classList.add("gone"),700); setTimeout(openDoors,1500); }
 });
 
 
@@ -425,7 +447,7 @@ function playBg(){ if(!document.contains(bgv)) return; const p=bgv.play(); if(p&
 function openDoors(){
   doorOpened=true;
   $("hero").classList.add("open"); $("frame").classList.add("open"); $("dots").classList.remove("show");
-  setTimeout(()=>{ $("doors").classList.add("dolly"); playBg(); $("flash").classList.add("go"); },2400);
+  setTimeout(()=>{ $("doors").classList.add("dolly"); playBg(); },2400);
   setTimeout(()=>{ $("curt").classList.add("open"); $("hero").classList.add("reveal"); try{bgv.currentTime=0;}catch(e){} },5400);
   setTimeout(()=>{ fx.level=2; spawnDoves(7); for(let i=0;i<6;i++) addButterfly(innerWidth/2,innerHeight*.5);
   for(let i=0;i<40;i++) addPetal(true); },5700);
