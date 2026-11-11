@@ -33,6 +33,9 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 /* 2. eshik ortidagi sahna */
 #scene{position:absolute;inset:0;z-index:1;overflow:hidden;
   background:radial-gradient(ellipse at 50% 78%,#8a5a22 0,#33160a 38%,#0a0407 74%)}
+#bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2.5s;pointer-events:none}
+#bgv.on{opacity:.95}
+#scene.hasvid .rays{opacity:.25!important}
 #scene .rays{position:absolute;left:50%;top:76%;width:260vmax;height:260vmax;margin:-130vmax 0 0 -130vmax;
   background:repeating-conic-gradient(from 0deg,rgba(255,226,160,.20) 0 5deg,transparent 5deg 15deg);
   -webkit-mask-image:radial-gradient(circle,#000 0,transparent 42%);mask-image:radial-gradient(circle,#000 0,transparent 42%);
@@ -73,7 +76,8 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 /* 3. bitta eshik */
 #doors{position:absolute;inset:0;z-index:10;display:grid;place-items:center;opacity:0;transition:opacity 1.8s;pointer-events:none}
 #doors.show{opacity:1}
-#doors.walloff{opacity:0;transition:opacity 2.2s}
+#doors{transform-origin:50% 46%}
+#doors.dolly{transform:scale(4.6);opacity:0;transition:transform 3.8s cubic-bezier(.55,0,.35,1),opacity 1.8s 1.9s}
 #doors.gone{display:none}
 .frame{position:relative;width:min(80vw,380px);height:min(76svh,650px);border-radius:999px 999px 4px 4px;perspective:1800px;
   box-shadow:0 0 70px 8px rgba(232,194,122,.28),0 0 0 200vmax #130609}
@@ -91,7 +95,7 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
   background:radial-gradient(ellipse at 50% 16%,rgba(255,235,190,.16),transparent 70%)}
 .leaf::after{content:"";position:absolute;left:13%;right:13%;top:68%;bottom:6%;border:3px solid #c79c45;border-radius:8px;
   box-shadow:inset 0 0 0 7px rgba(0,0,0,.26),0 0 14px rgba(240,207,138,.2);background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(255,235,190,.06))}
-.frame.open .leaf{transform:rotateY(-112deg)}
+.frame.open .leaf{transform:rotateY(112deg)}
 
 /* chiroyli qulf */
 #lock{position:absolute;left:50%;top:55%;z-index:5;width:124px;height:150px;margin:-75px 0 0 -62px;border:0;background:none;
@@ -170,6 +174,7 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 
   <!-- eshik ortidagi sahna -->
   <div id="scene">
+    <video id="bgv" muted playsinline loop preload="auto" src="scene.mp4"></video>
     <div class="rays"></div><div class="beam"></div><div class="floor"></div>
     <svg class="rings" viewBox="0 0 120 70" aria-hidden="true">
       <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset=".5" stop-color="#e8c27a"/><stop offset="1" stop-color="#a97a2a"/></linearGradient></defs>
@@ -347,14 +352,16 @@ $("mus").addEventListener("click",()=>{
   $("mus").textContent=muted?"✕":"♪";
 });
 
+const bgv=$("bgv");
+bgv.addEventListener("error",()=>{ bgv.remove(); });
+function playBg(){ if(!document.contains(bgv)) return; const p=bgv.play(); if(p&&p.then) p.then(()=>{ bgv.classList.add("on"); $("scene").classList.add("hasvid"); }).catch(()=>{}); }
 function openDoors(){
   doorOpened=true;
-  $("hero").classList.add("open"); $("frame").classList.add("open");
+  $("hero").classList.add("open"); $("frame").classList.add("open"); $("doors").classList.add("dolly"); playBg();
   $("dots").classList.remove("show"); $("flash").classList.add("go");
   fx.level=2; spawnDoves(7); for(let i=0;i<6;i++) addButterfly(innerWidth/2,innerHeight*.5);
   for(let i=0;i<40;i++) addPetal(true);
-  setTimeout(()=>$("doors").classList.add("walloff"),2300);
-  setTimeout(()=>$("doors").classList.add("gone"),5000);
+    setTimeout(()=>$("doors").classList.add("gone"),4200);
   setTimeout(()=>{ document.body.classList.remove("lock"); $("scrollHint").classList.add("on"); },5200);
 }
 
