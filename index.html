@@ -70,48 +70,53 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 #scrollHint.on{opacity:1;animation:nudge 1.8s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateY(6px)}}
 
-/* 3. qo'sh eshik */
-#doors{position:absolute;inset:0;z-index:10;display:flex;opacity:0;transition:opacity 1.8s;perspective:1700px;
-  background:transparent;pointer-events:none}
+/* 3. bitta eshik */
+#doors{position:absolute;inset:0;z-index:10;display:grid;place-items:center;opacity:0;transition:opacity 1.8s;pointer-events:none}
 #doors.show{opacity:1}
-.leaf{flex:1;position:relative;
-  background:
-    radial-gradient(ellipse at 50% 30%,rgba(255,255,255,.10),transparent 60%),
-    repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 3px,rgba(255,255,255,.03) 3px 7px),
-    linear-gradient(90deg,#3a060d,#841424 48%,#4a0a14);
-  box-shadow:inset 0 0 0 7px #c79c45,inset 0 0 0 10px #38060c,inset 0 0 0 12px #f0cf8a,inset 0 0 90px rgba(0,0,0,.65);
-  transition:transform 2.8s cubic-bezier(.55,.05,.2,1);backface-visibility:hidden}
-.leaf.l{transform-origin:left center}.leaf.r{transform-origin:right center}
-.leaf::before{content:"";position:absolute;inset:7% 13% 30%;border:3px solid #c79c45;border-radius:120px 120px 8px 8px;
-  box-shadow:inset 0 0 0 6px rgba(0,0,0,.28),0 0 16px rgba(240,207,138,.28);
-  background:radial-gradient(ellipse at 50% 18%,rgba(255,235,190,.14),transparent 70%)}
-.leaf::after{content:"";position:absolute;inset:75% 13% 7%;border:3px solid #c79c45;border-radius:8px;
-  box-shadow:inset 0 0 0 6px rgba(0,0,0,.28),0 0 14px rgba(240,207,138,.2);
-  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(255,235,190,.06))}
-.leaf i{position:absolute;top:50%;width:11px;height:62px;margin-top:-31px;border-radius:6px;background:linear-gradient(90deg,#8d6522,#fff0c4,#8d6522);
-  box-shadow:0 0 10px rgba(240,207,138,.5)}
-.leaf.l i{right:12px}.leaf.r i{left:12px}
-#doors.open .leaf.l{transform:rotateY(-108deg)}
-#doors.open .leaf.r{transform:rotateY(108deg)}
+#doors.walloff{opacity:0;transition:opacity 2.2s}
 #doors.gone{display:none}
+.frame{position:relative;width:min(80vw,380px);height:min(76svh,650px);border-radius:999px 999px 4px 4px;perspective:1800px;
+  box-shadow:0 0 70px 8px rgba(232,194,122,.28),0 0 0 200vmax #130609}
+.frame::before{content:"";position:absolute;inset:-14px;border-radius:999px 999px 8px 8px;border:5px solid #c79c45;
+  box-shadow:inset 0 0 0 3px #38060c,0 0 0 3px #f0cf8a,0 0 26px rgba(232,194,122,.45);pointer-events:none;z-index:3}
+.leaf{position:absolute;inset:0;border-radius:999px 999px 4px 4px;transform-origin:left center;
+  background:
+    radial-gradient(ellipse at 50% 26%,rgba(255,255,255,.13),transparent 62%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 3px,rgba(255,255,255,.03) 3px 8px),
+    linear-gradient(90deg,#3a060d,#871526 50%,#4a0a14);
+  box-shadow:inset 0 0 0 6px #c79c45,inset 0 0 0 9px #38060c,inset 0 0 100px rgba(0,0,0,.6);
+  transition:transform 3s cubic-bezier(.55,.05,.2,1);backface-visibility:hidden}
+.leaf::before{content:"";position:absolute;left:13%;right:13%;top:10%;bottom:46%;border:3px solid #c79c45;border-radius:999px 999px 8px 8px;
+  box-shadow:inset 0 0 0 7px rgba(0,0,0,.26),0 0 16px rgba(240,207,138,.25);
+  background:radial-gradient(ellipse at 50% 16%,rgba(255,235,190,.16),transparent 70%)}
+.leaf::after{content:"";position:absolute;left:13%;right:13%;top:68%;bottom:6%;border:3px solid #c79c45;border-radius:8px;
+  box-shadow:inset 0 0 0 7px rgba(0,0,0,.26),0 0 14px rgba(240,207,138,.2);background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(255,235,190,.06))}
+.frame.open .leaf{transform:rotateY(-112deg)}
 
-/* yurak qulf */
-#lock{position:absolute;left:50%;top:50%;z-index:20;width:112px;height:112px;margin:-56px 0 0 -56px;border:0;background:none;
-  opacity:0;pointer-events:none;transition:opacity 1.6s,transform .6s;cursor:pointer;touch-action:manipulation}
+/* chiroyli qulf */
+#lock{position:absolute;left:50%;top:55%;z-index:5;width:124px;height:150px;margin:-75px 0 0 -62px;border:0;background:none;
+  opacity:0;pointer-events:none;transition:opacity 1.6s;cursor:pointer;touch-action:manipulation}
 #lock.show{opacity:1;pointer-events:auto}
-#lock.gone{opacity:0!important;pointer-events:none;transform:scale(1.5)}
-#lock svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 10px rgba(255,214,130,.55));transition:filter .4s}
-#lock::before,#lock::after{content:"";position:absolute;inset:8px;border-radius:50%;border:2px solid rgba(255,226,160,.8);opacity:0}
-#lock.wait svg{animation:beat 1.3s ease-in-out infinite;filter:drop-shadow(0 0 22px rgba(255,214,130,.95))}
+#lock svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,214,130,.35));transition:filter .4s}
+#lock #shackle{transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-origin:34px 72px}
+#lock.open1 #shackle{transform:translateY(-7px) rotate(-6deg)}
+#lock.open2 #shackle{transform:translateY(-16px) rotate(-52deg)}
+#lock .glint{animation:glint 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+#lock .glint.g2{animation-delay:1.1s}
+@keyframes glint{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1)}}
+#lock::before,#lock::after{content:"";position:absolute;left:50%;top:56%;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;border:2px solid rgba(255,226,160,.85);opacity:0;pointer-events:none}
+#lock.wait svg{animation:beat 1.3s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6)) drop-shadow(0 0 24px rgba(255,214,130,.95))}
 #lock.wait::before{animation:ripple 1.8s ease-out infinite}
 #lock.wait::after{animation:ripple 1.8s .9s ease-out infinite}
 #lock.tap svg{animation:tapb .5s ease-out;filter:drop-shadow(0 0 40px #fff)}
-@keyframes beat{50%{transform:scale(1.12)}}
-@keyframes ripple{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.1);opacity:0}}
-@keyframes tapb{0%{transform:scale(1)}40%{transform:scale(1.28)}100%{transform:scale(1)}}
-#lockHint{position:absolute;left:0;right:0;top:calc(50% + 74px);z-index:20;text-align:center;font-size:.7rem;letter-spacing:.38em;color:#f0d9a6;font-weight:500;opacity:0;transition:opacity .8s;pointer-events:none}
+#lock.gone{pointer-events:none}
+#lock.gone svg{transition:transform 1.1s cubic-bezier(.5,0,1,.6),opacity 1s;transform:translateY(150px) rotate(24deg);opacity:0}
+@keyframes beat{50%{transform:scale(1.09)}}
+@keyframes ripple{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.3);opacity:0}}
+@keyframes tapb{0%{transform:scale(1)}40%{transform:scale(1.22)}100%{transform:scale(1)}}
+#lockHint{position:absolute;left:0;right:0;text-shadow:0 1px 8px #000;top:calc(55% + 86px);z-index:20;text-align:center;font-size:.7rem;letter-spacing:.38em;color:#f0d9a6;font-weight:500;opacity:0;transition:opacity .8s;pointer-events:none}
 #lockHint.on{opacity:1}
-#dots{position:absolute;left:0;right:0;top:calc(50% + 100px);z-index:20;display:flex;gap:12px;justify-content:center;opacity:0;transition:opacity 1.4s;pointer-events:none}
+#dots{position:absolute;left:0;right:0;top:calc(55% + 112px);z-index:20;display:flex;gap:12px;justify-content:center;opacity:0;transition:opacity 1.4s;pointer-events:none}
 #dots.show{opacity:1}
 #dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid #e8c27a;transition:.5s}
 #dots i.on{background:#e8c27a;box-shadow:0 0 10px #e8c27a}
@@ -180,22 +185,41 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
     </div>
   </div>
 
-  <!-- qo'sh eshik -->
-  <div id="doors"><div class="leaf l"><i></i></div><div class="leaf r"><i></i></div></div>
-
-  <button id="lock" type="button" aria-label="Qulfni bosish">
-    <svg viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c6"/><stop offset=".45" stop-color="#e8c27a"/><stop offset="1" stop-color="#9a6b1f"/></linearGradient>
-        <radialGradient id="hs" cx=".35" cy=".3" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-      </defs>
-      <path d="M50 88C18 64 8 46 8 31 8 19 17 11 29 11c9 0 17 5 21 13 4-8 12-13 21-13 12 0 21 8 21 20 0 15-10 33-42 57z" fill="url(#hg)" stroke="#6b4a14" stroke-width="3"/>
-      <path d="M50 88C18 64 8 46 8 31 8 19 17 11 29 11c9 0 17 5 21 13 4-8 12-13 21-13 12 0 21 8 21 20 0 15-10 33-42 57z" fill="url(#hs)"/>
-      <circle cx="50" cy="42" r="8" fill="#3a0a10"/><path d="M46 46h8l3 18H43z" fill="#3a0a10"/>
-    </svg>
-  </button>
-  <div id="lockHint">QULFNI BOSING</div>
-  <div id="dots"><i></i><i></i></div>
+  <!-- bitta eshik -->
+  <div id="doors"><div class="frame" id="frame">
+    <div class="leaf"></div>
+    <button id="lock" type="button" aria-label="Qulfni bosish">
+      <svg viewBox="0 0 120 150">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d0"/><stop offset=".35" stop-color="#f0cf8a"/><stop offset=".7" stop-color="#c79c45"/><stop offset="1" stop-color="#7d5516"/></linearGradient>
+          <linearGradient id="goldv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffefb8"/><stop offset=".5" stop-color="#d9ac55"/><stop offset="1" stop-color="#8a5f1b"/></linearGradient>
+          <radialGradient id="gloss" cx=".3" cy=".25" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="gem" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff9aa6"/><stop offset=".5" stop-color="#c3122a"/><stop offset="1" stop-color="#5a0612"/></radialGradient>
+        </defs>
+        <!-- rozetka -->
+        <circle cx="60" cy="92" r="56" fill="#2a0508" stroke="url(#gold)" stroke-width="4"/>
+        <circle cx="60" cy="92" r="48" fill="none" stroke="#c79c45" stroke-width="1.2" stroke-dasharray="2 5" stroke-linecap="round"/>
+        <!-- shackle -->
+        <g id="shackle"><path d="M36 74V50a24 24 0 0 1 48 0v24" fill="none" stroke="#5e3f0f" stroke-width="13" stroke-linecap="round"/>
+          <path d="M36 74V50a24 24 0 0 1 48 0v24" fill="none" stroke="url(#goldv)" stroke-width="9" stroke-linecap="round"/>
+          <path d="M40 60V50a20 20 0 0 1 20-20" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></g>
+        <!-- yurak tanasi -->
+        <path d="M60 140C24 116 14 98 14 86C14 72 24 64 36 64C46 64 55 69 60 77C65 69 74 64 84 64C96 64 106 72 106 86C106 98 96 116 60 140Z" fill="url(#gold)" stroke="#5e3f0f" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M60 130C32 110 24 96 24 87C24 77 31 72 38 72C47 72 55 78 60 86C65 78 73 72 82 72C89 72 96 77 96 87C96 96 88 110 60 130Z" fill="none" stroke="#7a5518" stroke-width="1.6"/>
+        <path d="M30 84c4-8 12-9 18-3M90 84c-4-8-12-9-18-3" fill="none" stroke="#8a5f1b" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="34" cy="88" r="4.2" fill="url(#gem)" stroke="#5e3f0f" stroke-width="1"/><circle cx="86" cy="88" r="4.2" fill="url(#gem)" stroke="#5e3f0f" stroke-width="1"/>
+        <circle cx="60" cy="116" r="3.4" fill="#fff6d0" stroke="#7a5518" stroke-width="1"/>
+        <!-- kalit teshigi -->
+        <circle cx="60" cy="96" r="7.5" fill="#2a0508"/><path d="M56.5 98h7L66 112H54z" fill="#2a0508"/>
+        <path d="M18 80C18 70 26 66 36 66" fill="none" stroke="url(#gloss)" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+        <!-- yaltirash -->
+        <path class="glint" d="M20 62l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z" fill="#fff8de"/>
+        <path class="glint g2" d="M98 112l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#fff8de"/>
+      </svg>
+    </button>
+    <div id="lockHint">QULFNI BOSING</div>
+    <div id="dots"><i></i><i></i></div>
+  </div></div>
 
   <div id="flash"></div>
   <div id="scrollHint">PASTGA SURING ↓</div>
@@ -258,23 +282,41 @@ tick();setInterval(tick,1000);
 
 /* ---------- musiqa: qism-qism, qulf bosilguncha to'xtab turadi ---------- */
 const GATE=[3.32,7.05];           // musiqa shu soniyalarda to'xtaydi
-let ctx,master,buf=null,ready,node=null,waiting=false,step=0,started=false,doorOpened=false;
+let ctx,master,buf=null,ready=Promise.resolve(),node=null,waiting=false,step=0,started=false,doorOpened=false,poll=null,fake=null;
+const el=new Audio(); el.preload="auto"; el.src="music.mp3";   // zaxira: fetch ishlamasa (masalan, fayl telefondan ochilganda)
 function initAudio(){
   const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
-  ctx=new AC(); master=ctx.createGain(); master.connect(ctx.destination);
-  ready=fetch("music.mp3").then(r=>r.arrayBuffer())
-    .then(a=>new Promise((ok,no)=>ctx.decodeAudioData(a,ok,no))).then(b=>{buf=b;}).catch(()=>{});
+  try{
+    ctx=new AC(); master=ctx.createGain(); master.connect(ctx.destination);
+    ready=fetch("music.mp3").then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer(); })
+      .then(a=>new Promise((ok,no)=>ctx.decodeAudioData(a,ok,no))).then(b=>{buf=b;}).catch(()=>{});
+  }catch(e){ ctx=null; }
 }
-function stopNode(){ if(node){ try{node.s.onended=null;node.s.stop();}catch(e){} node=null; } }
+function stopNode(){
+  if(node){ try{node.s.onended=null;node.s.stop();}catch(e){} node=null; }
+  clearInterval(poll); clearTimeout(fake);
+}
 function playSeg(from,to,fadeIn){
-  if(!ctx||!buf) return; stopNode();
-  const t=ctx.currentTime+0.03, g=ctx.createGain(), s=ctx.createBufferSource();
-  s.buffer=buf; s.connect(g); g.connect(master);
-  g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(1,t+fadeIn);
-  if(to){const d=to-from; g.gain.setValueAtTime(1,t+d-0.22); g.gain.linearRampToValueAtTime(0.0001,t+d);
-    s.start(t,from,d); s.onended=()=>{ if(node&&node.s===s) onGate(); };}
-  else{ s.loop=true; s.loopStart=8; s.loopEnd=136; s.start(t,from); }
-  node={s,g};
+  stopNode();
+  if(ctx&&buf){
+    const t=ctx.currentTime+0.03, g=ctx.createGain(), s=ctx.createBufferSource();
+    s.buffer=buf; s.connect(g); g.connect(master);
+    g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(1,t+fadeIn);
+    if(to){const d=to-from; g.gain.setValueAtTime(1,t+d-0.22); g.gain.linearRampToValueAtTime(0.0001,t+d);
+      s.start(t,from,d); s.onended=()=>{ if(node&&node.s===s) onGate(); };}
+    else{ s.loop=true; s.loopStart=8; s.loopEnd=136; s.start(t,from); }
+    node={s,g}; return;
+  }
+  // zaxira 1: oddiy audio element
+  let played=false;
+  try{ el.pause(); el.currentTime=from; el.loop=!to; const pr=el.play(); if(pr&&pr.then) pr.then(()=>{played=true;}).catch(()=>{}); }catch(e){}
+  if(to){
+    const t0=Date.now();
+    poll=setInterval(()=>{
+      const playing=!el.paused&&el.readyState>1;
+      if((playing&&el.currentTime>=to)||Date.now()-t0>(to-from)*1000+1500){ clearInterval(poll); el.pause(); onGate(); }
+    },60);
+  }
 }
 function onGate(){ waiting=true; $("lock").classList.add("wait"); $("lockHint").classList.add("on"); }
 
@@ -282,9 +324,10 @@ $("start").addEventListener("click",async()=>{
   if(started) return; started=true;
   if(ctx&&ctx.state==="suspended") ctx.resume();
   $("start").classList.add("hide"); $("mus").classList.add("show");
-  if(ready) await ready;
+  // eshik va qulf musiqaga bog'liq emas: darrov chiqadi
+  setTimeout(()=>{ $("doors").classList.add("show"); $("lock").classList.add("show"); $("dots").classList.add("show"); fx.level=1; },500);
+  await Promise.race([ready,new Promise(r=>setTimeout(r,3500))]);
   playSeg(0,GATE[0],0.25);
-  setTimeout(()=>{ $("doors").classList.add("show"); $("lock").classList.add("show"); $("dots").classList.add("show"); fx.level=1; },600);
 });
 
 $("lock").addEventListener("click",()=>{
@@ -292,22 +335,26 @@ $("lock").addEventListener("click",()=>{
   if(!waiting||doorOpened) return;
   waiting=false; l.classList.remove("wait"); $("lockHint").classList.remove("on");
   $("dots").children[step].classList.add("on"); step++;
-  burst(innerWidth/2,innerHeight/2,step===1?14:26);
-  if(step===1){ playSeg(GATE[0],GATE[1],0.05); }
-  else { playSeg(GATE[1],null,0.05); setTimeout(openDoors,750); }
+  const r=l.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,step===1?16:30);
+  if(step===1){ l.classList.add("open1"); playSeg(GATE[0],GATE[1],0.05); }
+  else { l.classList.add("open2"); playSeg(GATE[1],null,0.05); setTimeout(()=>l.classList.add("gone"),700); setTimeout(openDoors,1500); }
 });
 
 let muted=false;
-$("mus").addEventListener("click",()=>{ if(!ctx) return; muted=!muted; muted?ctx.suspend():ctx.resume(); $("mus").textContent=muted?"✕":"♪"; });
+$("mus").addEventListener("click",()=>{
+  muted=!muted;
+  if(ctx&&buf){ muted?ctx.suspend():ctx.resume(); } else { muted?el.pause():el.play().catch(()=>{}); }
+  $("mus").textContent=muted?"✕":"♪";
+});
 
 function openDoors(){
   doorOpened=true;
-  $("hero").classList.add("open"); $("doors").classList.add("open");
-  $("lock").classList.add("gone"); $("dots").classList.remove("show");
-  $("flash").classList.add("go");
-  fx.level=2; spawnDoves(7); for(let i=0;i<7;i++) addButterfly(innerWidth/2,innerHeight*.5);
-  for(let i=0;i<60;i++) addPetal(true);
-  setTimeout(()=>{ $("doors").classList.add("gone"); },3200);
+  $("hero").classList.add("open"); $("frame").classList.add("open");
+  $("dots").classList.remove("show"); $("flash").classList.add("go");
+  fx.level=2; spawnDoves(7); for(let i=0;i<6;i++) addButterfly(innerWidth/2,innerHeight*.5);
+  for(let i=0;i<40;i++) addPetal(true);
+  setTimeout(()=>$("doors").classList.add("walloff"),2300);
+  setTimeout(()=>$("doors").classList.add("gone"),5000);
   setTimeout(()=>{ document.body.classList.remove("lock"); $("scrollHint").classList.add("on"); },5200);
 }
 
