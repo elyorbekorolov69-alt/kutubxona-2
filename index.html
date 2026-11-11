@@ -97,10 +97,12 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
   background:radial-gradient(ellipse at 50% 16%,rgba(255,235,190,.16),transparent 70%)}
 .leaf::after{content:"";position:absolute;left:13%;right:13%;top:68%;bottom:6%;border:3px solid #c79c45;border-radius:8px;
   box-shadow:inset 0 0 0 7px rgba(0,0,0,.26),0 0 14px rgba(240,207,138,.2);background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(255,235,190,.06))}
+.leaf.img{background:url(door_c.jpg) center/100% 100% no-repeat,#4a0a14;box-shadow:inset 0 0 0 4px #c79c45,inset 0 0 60px rgba(0,0,0,.45)}
+.leaf.img::before,.leaf.img::after{display:none}
 .frame.open .leaf{transform:rotateY(112deg)}
 
 /* chiroyli qulf */
-#lock{position:absolute;left:50%;top:55%;z-index:5;width:124px;height:150px;margin:-75px 0 0 -62px;border:0;background:none;
+#lock{position:absolute;left:50%;top:46%;z-index:5;width:124px;height:150px;margin:-75px 0 0 -62px;border:0;background:none;
   opacity:0;pointer-events:none;transition:opacity 1.6s;cursor:pointer;touch-action:manipulation}
 #lock.show{opacity:1;pointer-events:auto}
 #lock svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,214,130,.35));transition:filter .4s}
@@ -196,7 +198,7 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 
   <!-- bitta eshik -->
   <div id="doors"><div class="frame" id="frame">
-    <div class="leaf"></div>
+    <div class="leaf img"></div>
     <button id="lock" type="button" aria-label="Qulfni bosish">
       <svg viewBox="0 0 120 150">
         <defs>
