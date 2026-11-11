@@ -7,12 +7,12 @@
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Great+Vibes&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#e8c27a; --gold2:#fff0c4; --gold3:#b88a3a;
   --wine:#5c0a14; --wine2:#2a0508; --ink:#0b0507; --cream:#fdf3e1;
-  --serif:'Cormorant Garamond',Georgia,serif; --script:'Great Vibes',cursive; --sans:'Jost',system-ui,sans-serif;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif; --script:'Playfair Display',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
@@ -64,11 +64,11 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 #hero.open .w3{animation:rise 2.2s 3.3s forwards}
 #hero.open .w4{animation:rise 2s 4.6s forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.neon{font-family:var(--script);font-size:clamp(2.6rem,13.5vw,5rem);line-height:1.05;color:#ffe3ad;
+.neon{font-family:var(--script);font-style:italic;font-weight:600;font-size:clamp(2.6rem,13.5vw,5rem);line-height:1.05;color:#ffe3ad;
   text-shadow:0 0 6px #ffc46b,0 0 20px #ff9a2e,0 0 44px #c8661b}
 .sub{font-family:var(--serif);font-size:clamp(.95rem,4vw,1.25rem);letter-spacing:.28em;color:#e9d6ae;margin-top:.7em;text-transform:uppercase}
 .names{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,10.5vw,3.8rem);letter-spacing:.14em;line-height:1.12;margin-top:.9em;color:var(--cream);text-shadow:0 2px 24px rgba(0,0,0,.6)}
-.names em{display:block;font-family:var(--script);font-style:normal;font-weight:400;letter-spacing:0;color:var(--gold);font-size:.85em}
+.names em{display:block;font-family:var(--script);font-style:italic;font-weight:500;letter-spacing:0;color:var(--gold);font-size:.85em}
 .dt{font-size:.82rem;letter-spacing:.38em;color:#d8c39a;margin-top:1em;font-weight:500}
 #scrollHint{position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));text-align:center;z-index:5;
   font-size:.66rem;letter-spacing:.4em;color:#c9b48c;opacity:0;transition:opacity 1.5s}
@@ -156,12 +156,12 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 .orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .orn::after{transform:scaleX(-1)}
 .kick{font-size:.72rem;letter-spacing:.42em;color:var(--gold);font-weight:500}
-.sec h2{font-family:var(--serif);font-weight:700;font-size:clamp(2.2rem,10vw,3.2rem);margin:.25em 0 .5em;letter-spacing:.02em;line-height:1.1}
-.sec p{font-family:var(--serif);font-size:1.22rem;line-height:1.6;color:#eadcc0}
+.sec h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,8.6vw,2.7rem);margin:.25em 0 .5em;letter-spacing:.02em;line-height:1.1}
+.sec p{font-family:var(--serif);font-size:1.05rem;line-height:1.75;color:#eadcc0}
 .sec p em{color:var(--gold2)}
 .card{margin-top:22px;padding:22px 18px;border:1px solid rgba(232,194,122,.45);border-radius:6px;background:rgba(255,240,196,.04);position:relative}
 .card::before{content:"";position:absolute;inset:5px;border:1px solid rgba(232,194,122,.18);border-radius:3px;pointer-events:none}
-.card .big{font-family:var(--serif);font-size:1.55rem;font-weight:700;line-height:1.25}
+.card .big{font-family:var(--serif);font-size:1.4rem;font-weight:700;line-height:1.25}
 .card .lbl{font-size:.68rem;letter-spacing:.4em;color:var(--gold);margin-bottom:.5em;font-weight:500}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .two>div{min-width:0;overflow-wrap:anywhere}
@@ -169,11 +169,14 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 #count div{border:1px solid rgba(232,194,122,.4);border-radius:6px;padding:12px 2px;background:rgba(0,0,0,.3)}
 #count strong{display:block;font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--gold2);line-height:1}
 #count span{font-size:.58rem;letter-spacing:.2em;color:var(--gold)}
-.addr{font-family:var(--serif);font-size:1.18rem;line-height:1.5;color:#f1e4c8}
+.addr{font-family:var(--serif);font-size:1.05rem;line-height:1.5;color:#f1e4c8}
 .btn{display:block;text-decoration:none;text-align:center;margin-top:20px;padding:15px 20px;border-radius:999px;font-weight:500;letter-spacing:.22em;font-size:.78rem;
   color:#2a0508;background:linear-gradient(180deg,#ffe9ae,#e0b25f);box-shadow:0 8px 24px rgba(232,194,122,.25),inset 0 1px 0 #fff6;transition:transform .15s}
 .btn:active{transform:scale(.97)}
-.thanks{font-family:var(--script);font-size:2.5rem;color:var(--gold);margin-top:46px;line-height:1.2}
+.wish{margin-top:22px;padding:20px 18px;border:1px solid rgba(232,194,122,.4);border-radius:6px;background:rgba(255,240,196,.04);font-family:var(--serif);font-style:italic;font-size:1.05rem;line-height:1.75;color:#f1e4c8;position:relative}
+.wish::before{content:"\201C";position:absolute;top:-4px;left:12px;font-size:3rem;color:var(--gold);line-height:1;font-style:normal}
+.who{margin-top:22px;font-family:var(--script);font-style:italic;font-size:1.5rem;color:var(--gold)}
+.thanks{font-family:var(--script);font-style:italic;font-weight:600;font-size:2.5rem;color:var(--gold);margin-top:46px;line-height:1.2}
 .ad{margin-top:54px;padding:38px 22px max(40px,env(safe-area-inset-bottom));text-align:center;background:#000;border-top:1px solid rgba(232,194,122,.3)}
 .ad h3{font-family:var(--serif);font-size:1.7rem;color:var(--gold);font-weight:700}
 .ad p{margin:.5em auto 0;max-width:420px;line-height:1.55;font-size:.92rem;color:#cdbf9f}
@@ -271,6 +274,16 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
       <div><strong id="cm">0</strong><span>DAQIQA</span></div>
       <div><strong id="cs">0</strong><span>SONIYA</span></div>
     </div>
+  </section>
+
+  <section class="sec rv">
+    <div class="orn">◆</div>
+    <div class="kick">TILAKLARIMIZ</div>
+    <h2>Dil so'zlarimiz</h2>
+    <div class="wish">Hayotimizdagi eng go'zal kunni sizlar bilan baham ko'rishni istaymiz. Sizning duolaringiz va tabassumingiz bizning baxtimizga baxt qo'shadi.</div>
+    <div class="wish">Oilamizni quvonch, tinchlik va mehr-oqibat bilan to'ldirishni Allohdan so'raymiz. Kelib, dasturxonimizga fayz kiritgaysiz.</div>
+    <div class="wish">Bu kunni birga o'tkazsak, xotiramizda umr bo'yi yorqin qoladi. Har biringizni intiqlik bilan kutamiz!</div>
+    <div class="who">Azizbek va Shahnoza</div>
   </section>
 
   <section class="sec rv">
