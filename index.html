@@ -79,7 +79,7 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 #doors{position:absolute;inset:0;z-index:10;background:#130609 url(door9.jpg) center/cover no-repeat;opacity:0;transition:opacity 1.8s;pointer-events:none}
 #doors.show{opacity:1}
 #doors{transform-origin:50% 46%}
-#doors.dolly{transform:scale(4.6);opacity:0;transition:transform 3.6s 1.5s cubic-bezier(.55,0,.35,1),opacity 1.6s 3s}
+#doors.dolly{transform:scale(4.6);opacity:0;transition:transform 3.4s 2.4s cubic-bezier(.55,0,.35,1),opacity 1.4s 4.2s}
 #gold,#gold2{position:absolute;inset:0;background:url(door9_gold.webp) center/cover no-repeat;mix-blend-mode:screen;pointer-events:none;opacity:calc(.08 + var(--lv,0)*.92);transition:opacity .08s linear}
 #gold{filter:brightness(1.7) saturate(1.2)}
 #gold2{filter:blur(12px) brightness(2.6) saturate(1.4)}
@@ -88,7 +88,7 @@ body.lock{overflow:hidden;height:100svh;touch-action:none}
 #doors.dolly #gold,#doors.dolly #gold2{opacity:0!important;animation:none;transition:opacity .5s}
 #doors.gone{display:none}
 .frame{position:absolute;left:50%;top:10%;width:300px;height:620px;border-radius:50% 50% 2px 2px/13% 13% 2px 2px;perspective:1000px;
-  box-shadow:0 0 40px 2px rgba(255,214,140,.25);background:radial-gradient(ellipse at 50% 40%,#fff3cf,#e9b45a 55%,#8a4a12)}
+  box-shadow:0 0 40px 2px rgba(255,214,140,.25);background:radial-gradient(ellipse at 50% 55%,rgba(255,243,207,.95),rgba(255,200,110,.55) 45%,rgba(120,20,30,0) 80%),repeating-linear-gradient(90deg,#4a0710 0 12px,#8c1325 12px 28px,#c9243b 28px 36px,#7a0f1f 36px 52px)}
 .frame::before{display:none;content:"";position:absolute;inset:-14px;border-radius:999px 999px 8px 8px;border:5px solid #c79c45;
   box-shadow:inset 0 0 0 3px #38060c,0 0 0 3px #f0cf8a,0 0 26px rgba(232,194,122,.45);pointer-events:none;z-index:3}
 .leaf{position:absolute;inset:0;border-radius:inherit;transform-origin:left center;
@@ -425,12 +425,12 @@ function playBg(){ if(!document.contains(bgv)) return; const p=bgv.play(); if(p&
 function openDoors(){
   doorOpened=true;
   $("hero").classList.add("open"); $("frame").classList.add("open"); $("dots").classList.remove("show");
-  setTimeout(()=>{ $("doors").classList.add("dolly"); playBg(); $("flash").classList.add("go"); },1500);
-  setTimeout(()=>{ $("curt").classList.add("open"); $("hero").classList.add("reveal"); try{bgv.currentTime=0;}catch(e){} },4300);
+  setTimeout(()=>{ $("doors").classList.add("dolly"); playBg(); $("flash").classList.add("go"); },2400);
+  setTimeout(()=>{ $("curt").classList.add("open"); $("hero").classList.add("reveal"); try{bgv.currentTime=0;}catch(e){} },5400);
   setTimeout(()=>{ fx.level=2; spawnDoves(7); for(let i=0;i<6;i++) addButterfly(innerWidth/2,innerHeight*.5);
-  for(let i=0;i<40;i++) addPetal(true); },4600);
-    setTimeout(()=>$("doors").classList.add("gone"),5600);
-  setTimeout(()=>{ document.body.classList.remove("lock"); $("scrollHint").classList.add("on"); },9800);
+  for(let i=0;i<40;i++) addPetal(true); },5700);
+    setTimeout(()=>$("doors").classList.add("gone"),6600);
+  setTimeout(()=>{ document.body.classList.remove("lock"); $("scrollHint").classList.add("on"); },10800);
 }
 
 /* ---------- effektlar: kapalak, kaptar, gul bargi, oltin zarra ---------- */
