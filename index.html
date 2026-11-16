@@ -209,7 +209,7 @@ main{position:relative;z-index:2;background:linear-gradient(180deg,#0a0407,#1d07
 <body class="lock">
 
 <section id="hero">
-  <div id="start"><span>Ekranni bosing<small>1 / 3</small></span></div>
+  <div id="start"><span>Ekranni bosing</span></div>
 
   <!-- eshik ortidagi sahna -->
   <div id="scene">
@@ -380,7 +380,7 @@ function playSeg(from,to,fadeIn){
     },60);
   }
 }
-function onGate(){ waiting=true; $("doors").classList.add("wait"); $("lock").classList.add("wait"); $("lockHint").innerHTML="Qulf ustidan bosing<small>"+(step+2)+" / 3</small>"; $("lockHint").classList.add("on"); }
+function onGate(){ waiting=true; $("doors").classList.add("wait"); $("lock").classList.add("wait"); $("lockHint").textContent="Qulf ustidan bosing"; $("lockHint").classList.add("on"); }
 
 
 /* eshik tepasidagi chiroq yonadi (milt-milt qilib), eshikni ko'rsatadi */
